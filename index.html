@@ -1,459 +1,543 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVA – Experiencias Exclusivas | Suscríbete</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>NOVA – Experiencias Exclusivas (Edición Ultra Luxury)</title>
+<style>
+  /* =========================================================
+     ESTILOS BASE & ANIMACIONES ULTRA LUXURY
+     ========================================================= */
+  :root {
+    --gold: #FFD700;
+    --gold-light: #FFF0A5;
+    --gold-dark: #B8860B;
+    --gold-glow: rgba(255, 215, 0, 0.6);
+    --bg-dark: #080808;
+  }
 
-  <!-- Tipografías: Cormorant Garamond (títulos) y Jost (texto) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
 
-  <style>
-    /* ===== Paleta NOVA ===== */
-    :root {
-      --negro: #171717;
-      --dorado: #D4AF37;
-      --blanco: #FFFFFF;
-      --dorado-oscuro: #30291C;
-      --gris: #252525;
-    }
+  /* Canvas de Partículas Interactivas en Tiempo Real */
+  #particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    [hidden] { display: none !important; }
+  /* Capa de destellos flotantes CSS */
+  .cosmic-particles {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(3px 3px at 100px 150px, rgba(255, 215, 0, 0.9), transparent),
+      radial-gradient(2px 2px at 300px 400px, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(4px 4px at 700px 200px, rgba(212, 175, 55, 0.8), transparent),
+      radial-gradient(3px 3px at 500px 800px, rgba(255, 235, 150, 0.9), transparent);
+    background-size: 800px 800px;
+    animation: floatCosmic 25s linear infinite;
+  }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: 'Jost', Arial, sans-serif;
-      color: var(--blanco);
-      /* Resplandor dorado arriba + degradado oscuro */
-      background:
-        radial-gradient(ellipse 70% 45% at 50% 0%, rgba(212, 175, 55, 0.20), transparent 70%),
-        linear-gradient(165deg, var(--negro) 0%, var(--negro) 45%, var(--dorado-oscuro) 100%);
-      background-attachment: fixed;
-    }
+  @keyframes floatCosmic {
+    0% { background-position: 0 0; }
+    100% { background-position: 800px -1600px; }
+  }
 
-    /* ===== Logo ===== */
-    header { text-align: center; padding: 52px 20px 30px; }
+  /* Animación de Resplandor Neón en el Borde Principal */
+  @keyframes ultraGoldPulse {
+    0% {
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+    50% {
+      border-color: #FFD700;
+      box-shadow: 0 0 50px rgba(255, 215, 0, 0.8), inset 0 0 35px rgba(255, 215, 0, 0.5);
+    }
+    100% {
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+  }
 
-    .logo {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 600;
-      font-size: 3.4rem;
-      letter-spacing: 0.4em;
-      padding-left: 0.4em; /* compensa el espaciado de la última letra */
-      line-height: 1;
-      /* Dorado con brillo sutil */
-      background: linear-gradient(100deg, #A8841F 0%, var(--dorado) 35%, #F3DC8A 50%, var(--dorado) 65%, #A8841F 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: var(--dorado);
-      animation: logo-entrada 1.4s cubic-bezier(.2,.7,.2,1) both; /* momento principal de la página */
-    }
+  /* Texto Neón Dorado Shimmer */
+  @keyframes goldShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
 
-    @keyframes logo-entrada {
-      from { letter-spacing: 0.9em; padding-left: 0.9em; opacity: 0; }
-      to   { letter-spacing: 0.4em; padding-left: 0.4em; opacity: 1; }
-    }
+  .gold-shimmer-text {
+    background: linear-gradient(90deg, #D4AF37 0%, #FFF0A5 50%, #D4AF37 100%);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: goldShimmer 4s linear infinite;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  }
 
-    .slogan {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 16px;
-      font-size: 0.72rem;
-      letter-spacing: 0.35em;
-      color: var(--blanco);
-    }
-    .slogan::before, .slogan::after {
-      content: "";
-      width: 44px;
-      height: 1px;
-      background: var(--dorado);
-    }
+  .wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 40px 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
 
-    /* ===== Tarjeta central ===== */
-    main {
-      flex: 1;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 20px 44px;
-    }
+  /* Contenedor Principal Glassmorphism */
+  .main-card {
+    width: 100%;
+    max-width: 650px;
+    background: rgba(15, 15, 18, 0.85);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 2px solid #D4AF37;
+    border-radius: 24px;
+    animation: ultraGoldPulse 5s infinite alternate;
+    overflow: hidden;
+  }
 
-    .card {
-      position: relative;
-      width: 100%;
-      max-width: 500px;
-      padding: 52px 42px 38px;
-      text-align: center;
-      background: linear-gradient(180deg, #2B2B2B 0%, var(--gris) 100%);
-      border: 1px solid var(--dorado);
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), 0 0 80px rgba(212, 175, 55, 0.07);
-      animation: tarjeta-entrada 0.9s 0.35s ease both;
-    }
-    /* Marco interior dorado */
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      pointer-events: none;
-    }
-    /* Rombos dorados en las esquinas */
-    .esquina {
-      position: absolute;
-      width: 11px;
-      height: 11px;
-      background: var(--dorado);
-      transform: rotate(45deg);
-      box-shadow: 0 0 0 3px var(--negro);
-    }
-    .esquina.tl { top: -6px;    left: -6px; }
-    .esquina.tr { top: -6px;    right: -6px; }
-    .esquina.bl { bottom: -6px; left: -6px; }
-    .esquina.br { bottom: -6px; right: -6px; }
+  /* Tarjetas Glassmorphism con Blur e Inclinación 3D */
+  .glass-box {
+    background: rgba(30, 30, 35, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
 
-    @keyframes tarjeta-entrada {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+  .glass-box:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: #FFD700;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.5);
+  }
 
-    .icono {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--dorado);
-      border-radius: 50%;
-      background: radial-gradient(circle, #3D3320 0%, var(--dorado-oscuro) 100%);
-      box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.08);
-    }
-    .icono svg { width: 30px; height: 30px; }
+  /* Formulario & Campos de Entrada */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 
-    h1, h2 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 500;
-      font-size: 2.4rem;
-      line-height: 1.12;
-      color: var(--blanco);
-    }
+  .input-email {
+    width: 100%;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
 
-    /* Separador ornamental */
-    .ornamento {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 18px auto 0;
-      width: 150px;
-      color: var(--dorado);
-      font-size: 0.6rem;
-    }
-    .ornamento::before, .ornamento::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--dorado));
-    }
-    .ornamento::after { background: linear-gradient(270deg, transparent, var(--dorado)); }
+  .input-email:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
+  }
 
-    .descripcion {
-      margin: 18px auto 28px;
-      max-width: 38ch;
-      font-weight: 300;
-      font-size: 1.02rem;
-      line-height: 1.7;
-      color: #D8D8D8;
-    }
+  /* Botón de Acción Principal Hiper-Luminoso */
+  .btn-hyper {
+    cursor: pointer;
+    display: inline-block;
+    padding: 18px 44px;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #000000;
+    background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+    text-decoration: none;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+  }
 
-    /* ===== Formulario ===== */
-    form { display: flex; flex-direction: column; gap: 14px; }
+  .btn-hyper:hover:not(:disabled) {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 0 45px rgba(255, 215, 0, 1), 0 0 18px rgba(255, 255, 255, 0.8);
+  }
 
-    input[type="email"] {
-      width: 100%;
-      padding: 17px 18px;
-      font-family: inherit;
-      font-size: 1rem;
-      color: var(--blanco);
-      background: var(--negro);
-      border: 1px solid #4A3F24;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    input[type="email"]::placeholder { color: #8A8A8A; }
-    input[type="email"]:focus {
-      border-color: var(--dorado);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
-    }
+  .btn-hyper.enviando {
+    opacity: 0.7;
+    cursor: wait;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  }
 
-    .btn {
-      position: relative;
-      overflow: hidden;
-      padding: 17px 20px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--negro);
-      background: linear-gradient(180deg, #E3C25A 0%, var(--dorado) 100%);
-      border: 1px solid var(--dorado);
-      cursor: pointer;
-      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
-    }
-    /* Destello que cruza el botón al pasar el cursor */
-    .btn::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -80%;
-      width: 50%; height: 100%;
-      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
-      transform: skewX(-20deg);
-    }
-    .btn:hover:not(:disabled) {
-      box-shadow: 0 8px 26px rgba(212, 175, 55, 0.35);
-    }
-    .btn:hover:not(:disabled)::after { left: 130%; transition: left 0.7s ease; }
-    .btn:focus-visible { outline: 3px solid var(--blanco); outline-offset: 3px; }
-    .btn:disabled { opacity: 0.75; cursor: wait; }
+  /* Botón Secundario Outline Glowing */
+  .btn-outline-hyper {
+    cursor: pointer;
+    display: inline-block;
+    padding: 14px 36px;
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #FFD700;
+    background: rgba(255, 215, 0, 0.05);
+    text-decoration: none;
+    border-radius: 50px;
+    border: 2px solid #FFD700;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+  }
 
-    .btn.enviando::before {
-      content: "";
-      display: inline-block;
-      width: 13px; height: 13px;
-      margin-right: 10px;
-      vertical-align: -2px;
-      border: 2px solid var(--negro);
-      border-right-color: transparent;
-      border-radius: 50%;
-      animation: giro 0.7s linear infinite;
-    }
-    @keyframes giro { to { transform: rotate(360deg); } }
+  .btn-outline-hyper:hover {
+    background: rgba(255, 215, 0, 0.25);
+    color: #FFFFFF;
+    transform: scale(1.04);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  }
 
-    .btn.secundario {
-      background: transparent;
-      color: var(--dorado);
-      margin-top: 26px;
-      padding: 14px 26px;
-      font-size: 0.85rem;
-    }
-    .btn.secundario:hover:not(:disabled) { background: var(--dorado); color: var(--negro); }
+  /* Mensajes de Error */
+  .mensaje {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    margin-top: 10px;
+    min-height: 18px;
+    transition: all 0.3s ease;
+  }
 
-    /* ===== Mensaje de error ===== */
-    .mensaje {
-      min-height: 1.4em;
-      margin-top: 16px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-    .mensaje.error { color: #FF8A80; }
+  .mensaje.error {
+    color: #FF6B6B;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+  }
 
-    /* ===== Beneficios ===== */
-    .beneficios {
-      display: flex;
-      justify-content: center;
-      gap: 8px 22px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-      padding-top: 22px;
-      border-top: 1px solid var(--dorado-oscuro);
-      font-size: 0.82rem;
-      color: #CFCFCF;
-    }
-    .beneficios span::before {
-      content: "\25C6";
-      margin-right: 7px;
-      font-size: 0.55rem;
-      vertical-align: 2px;
-      color: var(--dorado);
-    }
-
-    .nota { margin-top: 16px; font-size: 0.78rem; color: #9A9A9A; }
-
-    /* ===== Vista de confirmación ===== */
-    #vista-ok { animation: tarjeta-entrada 0.6s ease both; }
-    #vista-ok .descripcion { margin-bottom: 0; }
-    #vista-ok strong { color: var(--dorado); font-weight: 500; word-break: break-all; }
-
-    /* ===== Footer ===== */
-    footer {
-      width: 100%;
-      padding: 22px 20px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #9A9A9A;
-      border-top: 1px solid var(--dorado-oscuro);
-    }
-
-    /* ===== Adaptable a celulares ===== */
-    @media (max-width: 520px) {
-      .logo { font-size: 2.5rem; }
-      header { padding-top: 38px; }
-      .card { padding: 40px 24px 30px; }
-      h1, h2 { font-size: 1.9rem; }
-      .slogan { letter-spacing: 0.25em; font-size: 0.66rem; }
-      .slogan::before, .slogan::after { width: 26px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .logo, .card, #vista-ok, .btn.enviando::before { animation: none; }
-      .btn::after { display: none; }
-    }
-  </style>
+  /* Código Promocional Neón */
+  .promo-code-box {
+    background: #000000;
+    border: 2px dashed #FFD700;
+    border-radius: 12px;
+    padding: 16px 36px;
+    font-family: 'Courier New', monospace;
+    font-size: 30px;
+    letter-spacing: 8px;
+    color: #FFD700;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    display: inline-block;
+  }
+</style>
 </head>
-
 <body>
 
-  <header>
-    <div class="logo">NOVA</div>
-    <div class="slogan">EXPERIENCIAS EXCLUSIVAS</div>
-  </header>
+<!-- Canvas de Partículas Interactivas -->
+<canvas id="particles-canvas"></canvas>
+<!-- Capa de Estrellas Dinámicas CSS -->
+<div class="cosmic-particles"></div>
 
-  <main>
-    <section class="card">
-      <span class="esquina tl"></span><span class="esquina tr"></span>
-      <span class="esquina bl"></span><span class="esquina br"></span>
+<div class="wrapper">
+  <table role="presentation" class="main-card" cellpadding="0" cellspacing="0" border="0">
+    
+    <!-- ENCABEZADO LOGO -->
+    <tr><td height="6" style="background: linear-gradient(90deg, #B8860B, #FFD700, #B8860B); height:6px;"></td></tr>
+    <tr>
+      <td align="center" style="padding: 30px 20px 20px 20px;">
+        <span class="gold-shimmer-text" style="font-size: 38px; letter-spacing: 16px; font-weight: bold; padding-left: 16px;">NOVA</span>
+      </td>
+    </tr>
+    <tr><td height="1" style="background: rgba(212, 175, 55, 0.3);"></td></tr>
 
-      <!-- Vista 1: formulario -->
-      <div id="vista-form">
-        <div class="icono" aria-hidden="true">
-          <!-- Icono de correo -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="5" width="18" height="14" rx="1.5"></rect>
-            <path d="M3.5 6.5 12 13l8.5-6.5"></path>
-          </svg>
+    <!-- BANNER DE BIENVENIDA -->
+    <tr>
+      <td align="center" style="padding: 35px 24px 10px 24px;">
+        <div style="font-size: 13px; letter-spacing: 7px; color: #FFD700; text-transform: uppercase;">ACCESO AL CÍRCULO EXCLUSIVO</div>
+        <div style="font-size: 40px; line-height: 48px; color: #FFFFFF; padding-top: 14px; font-weight: normal;">
+          Tu lugar en NOVA<br><span style="font-style: italic;" class="gold-shimmer-text">te está esperando</span>
+        </div>
+      </td>
+    </tr>
+
+    <!-- =========================================================
+         SECCIÓN DE FORMULARIO DE SUSCRIPCIÓN INTEGRADOCON EMAILJS
+         ========================================================= -->
+    <tr>
+      <td align="center" style="padding: 20px 36px 40px 36px;">
+        
+        <!-- VISTA 1: FORMULARIO ACTIVO -->
+        <div id="vista-form">
+          <div style="font-family: 'Arial', sans-serif; font-size: 15px; line-height: 26px; color: #D0D0D0; padding-bottom: 24px;">
+            Ingresa tu correo electrónico para activar tu membresía privada y recibir tu código de bienvenida.
+          </div>
+
+          <form id="form-suscripcion" class="form-group" novalidate>
+            <input 
+              type="email" 
+              id="user_email" 
+              name="user_email" 
+              class="input-email" 
+              placeholder="tu@correo.com" 
+              required 
+            />
+            
+            <div id="mensaje" class="mensaje"></div>
+
+            <div style="padding-top: 10px;">
+              <button type="submit" id="btn-enviar" class="btn-hyper">QUIERO SUSCRIBIRME</button>
+            </div>
+          </form>
         </div>
 
-        <h1>Entra al círculo NOVA</h1>
-        <div class="ornamento" aria-hidden="true">&#9670;</div>
-        <p class="descripcion">
-          Suscríbete y recibe invitaciones a experiencias privadas, ofertas que no se publican y acceso antes que nadie.
-        </p>
+        <!-- VISTA 2: CONFIRMACIÓN DE ÉXITO (HIDDEN POR DEFECTO) -->
+        <div id="vista-ok" hidden>
+          <div style="font-size: 24px; color: #FFD700; padding-bottom: 10px;">¡Bienvenido al Círculo NOVA!</div>
+          <div style="font-family: 'Arial', sans-serif; font-size: 15px; line-height: 26px; color: #D0D0D0;">
+            Hemos registrado tu invitación para:
+          </div>
 
-        <!-- IMPORTANTE: el input debe llevar name="user_email" -->
-        <form id="form-suscripcion" novalidate>
-          <input
-            type="email"
-            name="user_email"
-            id="user_email"
-            placeholder="tu@correo.com"
-            autocomplete="email"
-            aria-label="Tu correo electrónico"
-            required>
-          <button type="submit" class="btn" id="btn-enviar">QUIERO SUSCRIBIRME</button>
-        </form>
+          <div style="margin: 20px 0;">
+            <div class="glass-box" style="display: inline-block; padding: 14px 32px; font-family: 'Arial', sans-serif; font-size: 14px;">
+              <span style="color: #FFD700;">&#9670;</span> Suscriptor VIP: <span id="correo-ok" style="color: #FFD700; font-weight: bold;"></span>
+            </div>
+          </div>
 
-        <p class="mensaje" id="mensaje" role="status" aria-live="polite"></p>
-
-        <div class="beneficios">
-          <span>Acceso anticipado</span>
-          <span>Ofertas privadas</span>
-          <span>Cupos limitados</span>
+          <div style="padding-top: 10px;">
+            <button type="button" id="btn-otro" class="btn-outline-hyper">SUSCRIBIR OTRO CORREO</button>
+          </div>
         </div>
-        <p class="nota">Sin spam. Puedes darte de baja cuando quieras.</p>
-      </div>
 
-      <!-- Vista 2: confirmación (aparece al enviar con éxito) -->
-      <div id="vista-ok" hidden role="status" aria-live="polite">
-        <div class="icono" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12.5l4.5 4.5L19 7.5"></path>
-          </svg>
+      </td>
+    </tr>
+
+    <!-- SECCIÓN: QUIÉNES SOMOS -->
+    <tr>
+      <td style="padding: 10px 30px 30px 30px;">
+        <div class="glass-box" style="padding: 40px 30px; text-align: center;">
+          <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700;">QUIÉNES SOMOS</div>
+          <div style="font-size: 30px; line-height: 38px; color: #FFFFFF; padding-top: 10px;">NOVA: lo exclusivo,<br><span style="font-style: italic;" class="gold-shimmer-text">bien hecho</span></div>
+          <div style="font-family: 'Arial', sans-serif; font-size: 15px; line-height: 26px; color: #C0C0C0; padding-top: 18px;">
+            NOVA reúne experiencias seleccionadas una a una. Cada propuesta tiene cupos limitados, atención personalizada y un estándar de calidad que no se negocia.
+          </div>
         </div>
-        <h2>Bienvenido a NOVA</h2>
-        <div class="ornamento" aria-hidden="true">&#9670;</div>
-        <p class="descripcion">
-          Enviamos tu correo de bienvenida a <strong id="correo-ok"></strong>.
-          Revisa tu bandeja de entrada o la carpeta de spam.
-        </p>
-        <button type="button" class="btn secundario" id="btn-otro">USAR OTRO CORREO</button>
-      </div>
-    </section>
-  </main>
+      </td>
+    </tr>
 
-  <footer>
-    &copy; 2026 NOVA – Experiencias Exclusivas. Todos los derechos reservados.
-  </footer>
+    <!-- TARJETAS DE BENEFICIOS 3D -->
+    <tr>
+      <td align="center" style="padding: 10px 15px 30px 15px;">
+        <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700; padding-bottom: 20px;">TUS VENTAJAS EXCLUSIVAS</div>
+        
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="33.33%" style="padding: 6px;">
+              <div class="glass-box" style="padding: 26px 12px; text-align: center;">
+                <div style="width: 54px; height: 54px; margin: 0 auto; background: rgba(255, 215, 0, 0.15); border: 1px solid #FFD700; border-radius: 50%; line-height: 54px; font-size: 24px; color: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.4);">&#10022;</div>
+                <div style="font-size: 17px; color: #FFFFFF; padding-top: 14px;">Acceso Anticipado</div>
+                <div style="font-family: Arial; font-size: 12px; color: #A0A0A0; padding-top: 8px; line-height: 18px;">Reserva antes que el público general.</div>
+              </div>
+            </td>
+            <td width="33.33%" style="padding: 6px;">
+              <div class="glass-box" style="padding: 26px 12px; text-align: center;">
+                <div style="width: 54px; height: 54px; margin: 0 auto; background: rgba(255, 215, 0, 0.15); border: 1px solid #FFD700; border-radius: 50%; line-height: 54px; font-size: 24px; color: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.4);">&#9830;</div>
+                <div style="font-size: 17px; color: #FFFFFF; padding-top: 14px;">Ofertas Privadas</div>
+                <div style="font-family: Arial; font-size: 12px; color: #A0A0A0; padding-top: 8px; line-height: 18px;">Beneficios inéditos no publicados.</div>
+              </div>
+            </td>
+            <td width="33.33%" style="padding: 6px;">
+              <div class="glass-box" style="padding: 26px 12px; text-align: center;">
+                <div style="width: 54px; height: 54px; margin: 0 auto; background: rgba(255, 215, 0, 0.15); border: 1px solid #FFD700; border-radius: 50%; line-height: 54px; font-size: 24px; color: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.4);">&#9733;</div>
+                <div style="font-size: 17px; color: #FFFFFF; padding-top: 14px;">Cupos Limitados</div>
+                <div style="font-family: Arial; font-size: 12px; color: #A0A0A0; padding-top: 8px; line-height: 18px;">Atención 100% personalizada.</div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
 
-  <!-- SDK de EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- CÓDIGO PROMOCIONAL DE BIENVENIDA -->
+    <tr>
+      <td style="padding: 10px 30px 40px 30px;">
+        <div class="glass-box" style="padding: 40px 24px; text-align: center; background: linear-gradient(180deg, rgba(212,175,55,0.25) 0%, rgba(15,15,18,0.9) 100%);">
+          <div style="font-size: 13px; letter-spacing: 5px; color: #FFD700; font-weight: bold;">INVITACIÓN ESPECIAL DE BIENVENIDA</div>
+          <div style="font-size: 46px; line-height: 52px; color: #FFFFFF; padding-top: 10px; font-weight: bold;">15% DE DESCUENTO</div>
+          <div style="font-style: italic; font-size: 18px; color: #FFD700; padding: 6px 0 24px 0;">en tu primera experiencia NOVA</div>
 
-  <script>
-    // Clave pública de EmailJS (no cambiar)
-    emailjs.init({
-      publicKey: "F9AmISLiAJwwFvsM5"
-    });
+          <div class="promo-code-box">NOVA15</div>
 
-    const formulario = document.getElementById("form-suscripcion");
-    const campoCorreo = document.getElementById("user_email");
-    const boton      = document.getElementById("btn-enviar");
-    const mensaje    = document.getElementById("mensaje");
-    const vistaForm  = document.getElementById("vista-form");
-    const vistaOk    = document.getElementById("vista-ok");
-    const correoOk   = document.getElementById("correo-ok");
-    const btnOtro    = document.getElementById("btn-otro");
+          <div style="font-family: Arial, sans-serif; font-size: 13px; color: #B0B0B0; padding-top: 20px;">Presenta este código al reservar. Válido por 30 días desde hoy.</div>
+        </div>
+      </td>
+    </tr>
 
-    function mostrarError(texto) {
-      mensaje.textContent = texto;
-      mensaje.className = "mensaje" + (texto ? " error" : "");
+    <!-- FOOTER EXCLUSIVO CON COPYRIGHT -->
+    <tr>
+      <td align="center" style="padding: 30px 24px; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+        <div class="gold-shimmer-text" style="font-size: 24px; letter-spacing: 12px; font-weight: bold; padding-left: 12px;">NOVA</div>
+        <div style="font-size: 10px; letter-spacing: 4px; color: #FFFFFF; padding-top: 4px;">EXPERIENCIAS EXCLUSIVAS</div>
+        <footer>
+          <div style="font-family: Arial, sans-serif; font-size: 12px; color: #777777; padding-top: 20px; line-height: 20px;">
+            &copy; 2026 NOVA – Experiencias Exclusivas. Todos los derechos reservados.
+          </div>
+        </footer>
+      </td>
+    </tr>
+
+  </table>
+</div>
+
+<!-- SDK de EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  // Inicialización de EmailJS
+  emailjs.init({
+    publicKey: "F9AmISLiAJwwFvsM5"
+  });
+
+  const formulario = document.getElementById("form-suscripcion");
+  const campoCorreo = document.getElementById("user_email");
+  const boton      = document.getElementById("btn-enviar");
+  const mensaje    = document.getElementById("mensaje");
+  const vistaForm  = document.getElementById("vista-form");
+  const vistaOk    = document.getElementById("vista-ok");
+  const correoOk   = document.getElementById("correo-ok");
+  const btnOtro    = document.getElementById("btn-otro");
+
+  function mostrarError(texto) {
+    mensaje.textContent = texto;
+    mensaje.className = "mensaje" + (texto ? " error" : "");
+  }
+
+  formulario.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+
+    const correo = campoCorreo.value.trim();
+
+    // Valida el correo antes de enviar
+    if (!campoCorreo.checkValidity() || correo === "") {
+      mostrarError("Escribe un correo válido, por ejemplo: nombre@correo.com");
+      campoCorreo.focus();
+      return;
     }
 
-    formulario.addEventListener("submit", function (evento) {
-      evento.preventDefault();
+    mostrarError("");
+    boton.disabled = true;
+    boton.classList.add("enviando");
+    boton.textContent = "ENVIANDO...";
 
-      const correo = campoCorreo.value.trim();
+    // Envía el formulario vía EmailJS
+    emailjs.sendForm(
+      "service_in7gaoi",
+      "template_o7h05u2",
+      this
+    )
+      .then(function () {
+        correoOk.textContent = correo;
+        formulario.reset();
+        vistaForm.hidden = true;
+        vistaOk.hidden = false;
+      })
+      .catch(function (error) {
+        console.error("Error de EmailJS:", error);
+        mostrarError("No pudimos enviar el correo. Revisa tu conexión e inténtalo de nuevo.");
+      })
+      .finally(function () {
+        boton.disabled = false;
+        boton.classList.remove("enviando");
+        boton.textContent = "QUIERO SUSCRIBIRME";
+      });
+  });
 
-      // Valida el correo antes de enviar
-      if (!campoCorreo.checkValidity() || correo === "") {
-        mostrarError("Escribe un correo válido, por ejemplo: nombre@correo.com");
-        campoCorreo.focus();
-        return;
+  // Volver al formulario para suscribir otro correo
+  btnOtro.addEventListener("click", function () {
+    vistaOk.hidden = true;
+    vistaForm.hidden = false;
+    campoCorreo.focus();
+  });
+
+  /* =========================================================
+     SISTEMA DE PARTÍCULAS CANVAS EN TIEMPO REAL
+     ========================================================= */
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 2.5 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.6;
+      this.speedY = (Math.random() - 0.5) * 0.6;
+      this.alpha = Math.random() * 0.8 + 0.2;
+      this.color = Math.random() > 0.3 ? '#FFD700' : '#FFFFFF';
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+        this.reset();
       }
+    }
 
-      mostrarError("");
-      boton.disabled = true;
-      boton.classList.add("enviando");
-      boton.textContent = "ENVIANDO...";
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = this.color;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
 
-      // Envía el formulario; EmailJS toma el campo name="user_email"
-      emailjs.sendForm(
-        "service_in7gaoi",
-        "template_o7h05u2",
-        this
-      )
-        .then(function () {
-          correoOk.textContent = correo;
-          formulario.reset();
-          vistaForm.hidden = true;
-          vistaOk.hidden = false;
-        })
-        .catch(function (error) {
-          console.error("Error de EmailJS:", error);
-          mostrarError("No pudimos enviar el correo. Revisa tu conexión e inténtalo de nuevo.");
-        })
-        .finally(function () {
-          boton.disabled = false;
-          boton.classList.remove("enviando");
-          boton.textContent = "QUIERO SUSCRIBIRME";
-        });
+  for (let i = 0; i < 120; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
     });
+    requestAnimationFrame(animate);
+  }
 
-    // Volver al formulario para suscribir otro correo
-    btnOtro.addEventListener("click", function () {
-      vistaOk.hidden = true;
-      vistaForm.hidden = false;
-      campoCorreo.focus();
-    });
-  </script>
+  animate();
+</script>
 
 </body>
 </html>
