@@ -1,482 +1,493 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
-<title>NOVA – Experiencias Exclusivas (Edición Ultra Luxury)</title>
+<title>NOVA – Experiencias Exclusivas</title>
 <style>
   /* =========================================================
-     ESTILOS BASE & ANIMACIONES ULTRA LUXURY
+     ESTILOS BASE & ANIMACIONES LUXURY
      ========================================================= */
   :root {
-    --gold: #FFD700;
-    --gold-light: #FFF0A5;
+    --gold-primary: #FFD700;
+    --gold-bright: #FFF5B8;
     --gold-dark: #B8860B;
     --gold-glow: rgba(255, 215, 0, 0.6);
-    --bg-dark: #080808;
+    --bg-dark: #050508;
   }
+
+  * { box-sizing: border-box; }
 
   body {
     margin: 0;
     padding: 0;
     background-color: var(--bg-dark);
-    font-family: 'Georgia', 'Times New Roman', serif;
+    font-family: 'Georgia', serif;
     color: #ffffff;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Canvas de Partículas Interactivas en Tiempo Real */
-  #particles-canvas {
+  /* Canvas de Fondo con Partículas Reactivas */
+  #interactive-canvas {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     z-index: 0;
     pointer-events: none;
   }
 
-  /* Capa de destellos flotantes CSS */
-  .cosmic-particles {
+  /* Capa de destellos superpuestos */
+  .glow-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: 1;
     pointer-events: none;
-    background-image: 
-      radial-gradient(3px 3px at 100px 150px, rgba(255, 215, 0, 0.9), transparent),
-      radial-gradient(2px 2px at 300px 400px, rgba(255, 255, 255, 0.7), transparent),
-      radial-gradient(4px 4px at 700px 200px, rgba(212, 175, 55, 0.8), transparent),
-      radial-gradient(3px 3px at 500px 800px, rgba(255, 235, 150, 0.9), transparent);
-    background-size: 800px 800px;
-    animation: floatCosmic 25s linear infinite;
+    background: 
+      radial-gradient(circle at 15% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 45%);
   }
 
-  @keyframes floatCosmic {
-    0% { background-position: 0 0; }
-    100% { background-position: 800px -1600px; }
+  /* Wrapper Principal */
+  .wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  /* Animación de Resplandor Neón en el Borde Principal */
-  @keyframes ultraGoldPulse {
-    0% {
-      border-color: #D4AF37;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.2);
-    }
-    50% {
-      border-color: #FFD700;
-      box-shadow: 0 0 50px rgba(255, 215, 0, 0.8), inset 0 0 35px rgba(255, 215, 0, 0.5);
-    }
-    100% {
-      border-color: #D4AF37;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.2);
-    }
+  /* Contenedor Principal Estilo Landing Page */
+  .main-card {
+    width: 100%;
+    max-width: 760px;
+    background: rgba(12, 12, 16, 0.9);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 2px solid #D4AF37;
+    border-radius: 28px;
+    box-shadow: 0 0 60px rgba(255, 215, 0, 0.25), inset 0 0 20px rgba(255, 215, 0, 0.15);
+    overflow: hidden;
+    position: relative;
   }
 
-  /* Texto Neón Dorado Shimmer */
+  /* Navbar / Encabezado */
+  .nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 35px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  }
+
+  /* Texto Neón Shimmer */
   @keyframes goldShimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
 
   .gold-shimmer-text {
-    background: linear-gradient(90deg, #D4AF37 0%, #FFF0A5 50%, #D4AF37 100%);
+    background: linear-gradient(90deg, #B8860B 0%, #FFD700 25%, #FFF5B8 50%, #FFD700 75%, #B8860B 100%);
     background-size: 200% auto;
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: goldShimmer 4s linear infinite;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    animation: goldShimmer 3s linear infinite;
+    text-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
   }
 
-  .wrapper {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    padding: 40px 10px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
+  /* Hero Section */
+  .hero-section {
+    padding: 50px 35px 35px 35px;
+    text-align: center;
   }
 
-  /* Contenedor Principal Glassmorphism */
-  .main-card {
-    width: 100%;
-    max-width: 650px;
-    background: rgba(15, 15, 18, 0.85);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 2px solid #D4AF37;
-    border-radius: 24px;
-    animation: ultraGoldPulse 5s infinite alternate;
-    overflow: hidden;
+  .badge-vip {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid #FFD700;
+    border-radius: 30px;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #FFD700;
+    background: rgba(255, 215, 0, 0.1);
+    margin-bottom: 18px;
   }
 
-  /* Tarjetas Glassmorphism con Blur e Inclinación 3D */
+  /* Contenedores Glassmorphism 3D */
   .glass-box {
-    background: rgba(30, 30, 35, 0.65);
+    background: rgba(28, 28, 35, 0.65);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 175, 55, 0.35);
-    border-radius: 16px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    transition: transform 0.1s ease-out, border-color 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
   }
 
   .glass-box:hover {
-    transform: translateY(-6px) scale(1.02);
     border-color: #FFD700;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 215, 0, 0.45);
   }
 
-  /* Formulario & Campos de Entrada */
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
+  /* Campo de Texto de Correo */
   .input-email {
     width: 100%;
-    padding: 16px 20px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(212, 175, 55, 0.5);
+    padding: 18px 24px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(212, 175, 55, 0.4);
     border-radius: 50px;
     color: #FFFFFF;
     font-family: 'Arial', sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     outline: none;
-    transition: all 0.3s ease;
     text-align: center;
+    transition: all 0.3s ease;
   }
 
   .input-email:focus {
     border-color: #FFD700;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), inset 0 0 10px rgba(255, 215, 0, 0.3);
+    background: rgba(0, 0, 0, 0.9);
   }
 
-  /* Botón de Acción Principal Hiper-Luminoso */
+  /* Botón Principal Hiper-Luminoso */
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), 0 0 50px rgba(255, 215, 0, 0.3); }
+    50% { box-shadow: 0 0 45px rgba(255, 215, 0, 1), 0 0 80px rgba(255, 235, 150, 0.7); }
+  }
+
   .btn-hyper {
     cursor: pointer;
-    display: inline-block;
-    padding: 18px 44px;
+    width: 100%;
+    max-width: 380px;
+    padding: 20px 40px;
     font-family: 'Georgia', serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     color: #000000;
-    background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
-    text-decoration: none;
-    border-radius: 50px;
+    background: linear-gradient(135deg, #FFF5B8 0%, #FFD700 50%, #B8860B 100%);
     border: none;
+    border-radius: 50px;
     outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pulseGlow 3s infinite;
   }
 
   .btn-hyper:hover:not(:disabled) {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 0 45px rgba(255, 215, 0, 1), 0 0 18px rgba(255, 255, 255, 0.8);
+    transform: scale(1.06) translateY(-3px);
   }
 
-  .btn-hyper.enviando {
-    opacity: 0.7;
-    cursor: wait;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-  }
-
-  /* Botón Secundario Outline Glowing */
-  .btn-outline-hyper {
-    cursor: pointer;
-    display: inline-block;
-    padding: 14px 36px;
-    font-family: 'Georgia', serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: #FFD700;
-    background: rgba(255, 215, 0, 0.05);
-    text-decoration: none;
-    border-radius: 50px;
+  /* Pase VIP Holográfico Animado */
+  .vip-card {
+    background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(10,10,12,0.95) 100%);
     border: 2px solid #FFD700;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.4);
+    animation: vipAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   }
 
-  .btn-outline-hyper:hover {
-    background: rgba(255, 215, 0, 0.25);
-    color: #FFFFFF;
-    transform: scale(1.04);
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  @keyframes vipAppear {
+    0% { opacity: 0; transform: scale(0.7) rotateX(30deg); }
+    100% { opacity: 1; transform: scale(1) rotateX(0deg); }
   }
 
-  /* Mensajes de Error */
-  .mensaje {
+  .mensaje-error {
     font-family: 'Arial', sans-serif;
     font-size: 13px;
+    color: #FF6B6B;
     margin-top: 10px;
     min-height: 18px;
-    transition: all 0.3s ease;
   }
 
-  .mensaje.error {
-    color: #FF6B6B;
-    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-  }
-
-  /* Código Promocional Neón */
-  .promo-code-box {
-    background: #000000;
-    border: 2px dashed #FFD700;
-    border-radius: 12px;
-    padding: 16px 36px;
+  /* Contador Regresivo */
+  .timer-box {
+    display: inline-block;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 10px;
     font-family: 'Courier New', monospace;
-    font-size: 30px;
-    letter-spacing: 8px;
+    font-size: 18px;
     color: #FFD700;
     font-weight: bold;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-    display: inline-block;
+    min-width: 50px;
   }
 </style>
 </head>
 <body>
 
-<!-- Canvas de Partículas Interactivas -->
-<canvas id="particles-canvas"></canvas>
-<!-- Capa de Estrellas Dinámicas CSS -->
-<div class="cosmic-particles"></div>
+<canvas id="interactive-canvas"></canvas>
+<div class="glow-overlay"></div>
 
 <div class="wrapper">
-  <table role="presentation" class="main-card" cellpadding="0" cellspacing="0" border="0">
+  <div class="main-card">
     
-    <!-- ENCABEZADO LOGO -->
-    <tr><td height="6" style="background: linear-gradient(90deg, #B8860B, #FFD700, #B8860B); height:6px;"></td></tr>
-    <tr>
-      <td align="center" style="padding: 30px 20px 20px 20px;">
-        <span class="gold-shimmer-text" style="font-size: 38px; letter-spacing: 16px; font-weight: bold; padding-left: 16px;">NOVA</span>
-      </td>
-    </tr>
-    <tr><td height="1" style="background: rgba(212, 175, 55, 0.3);"></td></tr>
+    <!-- ENCABEZADO / NAVBAR -->
+    <div style="height: 5px; background: linear-gradient(90deg, #997500, #FFD700, #FFF5B8, #FFD700, #997500);"></div>
+    <div class="nav-header">
+      <div class="gold-shimmer-text" style="font-size: 28px; letter-spacing: 10px; font-weight: bold;">NOVA</div>
+      <a href="#seccion-suscripcion" style="color: #FFD700; text-decoration: none; font-size: 12px; letter-spacing: 2px; border: 1px solid rgba(255,215,0,0.4); padding: 8px 18px; border-radius: 20px; transition: all 0.3s ease;">UNIRSE AL CÍRCULO</a>
+    </div>
 
-    <!-- BANNER DE BIENVENIDA -->
-    <tr>
-      <td align="center" style="padding: 35px 24px 10px 24px;">
+    <!-- 1. HERO SECTION -->
+    <div class="hero-section">
+      <div class="badge-vip">MEMBRESÍA EXCLUSIVA</div>
+      <div style="font-size: 42px; line-height: 50px; color: #FFFFFF; font-weight: normal;">
+        Experiencias únicas,<br><span style="font-style: italic;" class="gold-shimmer-text">diseñadas para recordar</span>
+      </div>
+      <div style="font-family: 'Arial', sans-serif; font-size: 15px; line-height: 26px; color: #CCCCCC; max-width: 540px; margin: 18px auto 0 auto;">
+        Accede a eventos privados, reservas prioritarias y beneficios inéditos creados para quienes buscan momentos fuera de lo ordinario.
+      </div>
+    </div>
+
+    <!-- 2. SECCIÓN: PROPUESTA DE VALOR / QUIÉNES SOMOS -->
+    <div style="padding: 10px 35px 25px 35px;">
+      <div class="glass-box tilt-element" style="padding: 35px 30px; text-align: center;">
+        <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700;">FILOSOFÍA NOVA</div>
+        <div style="font-size: 26px; line-height: 34px; color: #FFFFFF; padding-top: 10px;">Lo exclusivo no es lo más caro,<br><span style="font-style: italic;" class="gold-shimmer-text">es lo que se siente hecho para ti</span></div>
+        <div style="font-family: 'Arial', sans-serif; font-size: 14px; line-height: 24px; color: #CCCCCC; padding-top: 14px;">
+          Cada propuesta en NOVA es seleccionada individualmente bajo un estándar de calidad riguroso. Nos encargamos de la curaduría, tú solo eliges cuál disfrutar.
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. SECCIÓN: VENTAJAS Y BENEFICIOS EXCLUSIVOS -->
+    <div style="padding: 10px 35px 25px 35px;">
+      <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700; text-align: center; padding-bottom: 16px;">LO QUE OBTIENES COMO SUSCRIPTOR</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <div class="glass-box tilt-element" style="padding: 26px 16px; text-align: center;">
+          <div style="font-size: 32px; color: #FFD700; padding-bottom: 8px;">&#10022;</div>
+          <div style="font-size: 17px; color: #FFFFFF;">Acceso Anticipado</div>
+          <div style="font-family: Arial; font-size: 12px; color: #AAAAAA; padding-top: 8px; line-height: 18px;">Reserva tus lugares antes de la publicación oficial.</div>
+        </div>
+        <div class="glass-box tilt-element" style="padding: 26px 16px; text-align: center;">
+          <div style="font-size: 32px; color: #FFD700; padding-bottom: 8px;">&#9830;</div>
+          <div style="font-size: 17px; color: #FFFFFF;">Ofertas Privadas</div>
+          <div style="font-family: Arial; font-size: 12px; color: #AAAAAA; padding-top: 8px; line-height: 18px;">Incentivos y experiencias no disponibles al público general.</div>
+        </div>
+        <div class="glass-box tilt-element" style="padding: 26px 16px; text-align: center;">
+          <div style="font-size: 32px; color: #FFD700; padding-bottom: 8px;">&#9733;</div>
+          <div style="font-size: 17px; color: #FFFFFF;">Cupos Limitados</div>
+          <div style="font-family: Arial; font-size: 12px; color: #AAAAAA; padding-top: 8px; line-height: 18px;">Atención personalizada en grupos reducidos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SECCIÓN: EVENTO DESTACADO -->
+    <div style="padding: 10px 35px 25px 35px;">
+      <div class="glass-box tilt-element" style="padding: 0 0 30px 0; text-align: center;">
+        <div style="background: #FFD700; color: #000; font-size: 11px; letter-spacing: 5px; font-weight: bold; padding: 8px 0;">&#9733; EDICIÓN INAUGURAL DESTACADA &#9733;</div>
+        <div style="font-size: 30px; color: #FFFFFF; padding-top: 20px;">Noche NOVA</div>
+        <div style="font-style: italic; font-size: 15px; color: #FFD700;">Solo suscriptores confirmados</div>
+        <div style="font-family: Arial; font-size: 14px; color: #DDDDDD; padding: 14px 28px; line-height: 22px;">
+          Una velada privada de gastronomía de autor, música en vivo y maridaje exclusivo. Las invitaciones se envían por correo en estricto orden de registro.
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. SECCIÓN: INVITACIÓN DE BIENVENIDA & CUENTA REGRESIVA -->
+    <div style="padding: 10px 35px 25px 35px;">
+      <div class="glass-box tilt-element" style="padding: 35px 25px; text-align: center; background: linear-gradient(180deg, rgba(212,175,55,0.2) 0%, rgba(12,12,16,0.9) 100%);">
+        <div style="font-size: 12px; letter-spacing: 5px; color: #FFD700; font-weight: bold;">CÓDIGO DE BIENVENIDA VIP</div>
+        <div style="font-size: 38px; color: #FFFFFF; padding-top: 6px; font-weight: bold;">15% DE DESCUENTO</div>
+        <div style="font-style: italic; font-size: 16px; color: #FFD700; padding-bottom: 16px;">Válido en tu primera reserva dentro del círculo</div>
+        
+        <div style="background: #000; border: 2px dashed #FFD700; padding: 12px 30px; font-family: monospace; font-size: 26px; color: #FFD700; display: inline-block; letter-spacing: 6px; font-weight: bold; border-radius: 10px;">
+          NOVA15
+        </div>
+
+        <!-- Reloj Contador Regresivo -->
+        <div style="padding-top: 20px;">
+          <div style="font-family: Arial; font-size: 12px; color: #AAA; padding-bottom: 8px;">TIEMPO RESTANTE DE ACTIVACIÓN:</div>
+          <div style="display: flex; justify-content: center; gap: 10px;">
+            <div><div class="timer-box" id="t-days">29</div><div style="font-size: 10px; color: #888; padding-top: 4px;">DÍAS</div></div>
+            <div><div class="timer-box" id="t-hours">23</div><div style="font-size: 10px; color: #888; padding-top: 4px;">HRS</div></div>
+            <div><div class="timer-box" id="t-mins">59</div><div style="font-size: 10px; color: #888; padding-top: 4px;">MIN</div></div>
+            <div><div class="timer-box" id="t-secs">59</div><div style="font-size: 10px; color: #888; padding-top: 4px;">SEG</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. SECCIÓN: CÓMO FUNCIONA -->
+    <div style="padding: 10px 35px 35px 35px;">
+      <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700; text-align: center; padding-bottom: 16px;">TU EXPERIENCIA EN 3 PASOS</div>
+      <div class="glass-box tilt-element" style="padding: 25px 30px;">
+        <div style="display: flex; align-items: center; gap: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,215,0,0.15);">
+          <div style="width: 40px; height: 40px; background: #FFD700; color: #000; border-radius: 50%; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">1</div>
+          <div>
+            <div style="font-size: 17px; color: #FFF;">Explora</div>
+            <div style="font-family: Arial; font-size: 13px; color: #AAA;">Revisa las propuestas privadas de tu interés.</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px; padding: 15px 0; border-bottom: 1px solid rgba(255,215,0,0.15);">
+          <div style="width: 40px; height: 40px; background: #FFD700; color: #000; border-radius: 50%; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">2</div>
+          <div>
+            <div style="font-size: 17px; color: #FFF;">Reserva</div>
+            <div style="font-family: Arial; font-size: 13px; color: #AAA;">Aplica tu código <span style="color:#FFD700;">NOVA15</span>.</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px; padding-top: 15px;">
+          <div style="width: 40px; height: 40px; background: #FFD700; color: #000; border-radius: 50%; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">3</div>
+          <div>
+            <div style="font-size: 17px; color: #FFF;">Disfruta</div>
+            <div style="font-family: Arial; font-size: 13px; color: #AAA;">Nosotros coordinamos cada detalle por ti.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SECCIÓN FINAL CON FORMULARIO (CALL TO ACTION PRINCIPAL) -->
+    <div id="seccion-suscripcion" style="padding: 40px 35px 50px 35px; text-align: center; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255, 215, 0, 0.2);">
+      
+      <!-- VISTA FORMULARIO -->
+      <div id="vista-form">
         <div style="font-size: 13px; letter-spacing: 7px; color: #FFD700; text-transform: uppercase;">ACCESO AL CÍRCULO EXCLUSIVO</div>
-        <div style="font-size: 40px; line-height: 48px; color: #FFFFFF; padding-top: 14px; font-weight: normal;">
-          Tu lugar en NOVA<br><span style="font-style: italic;" class="gold-shimmer-text">te está esperando</span>
+        <div style="font-size: 34px; line-height: 42px; color: #FFFFFF; padding: 12px 0 16px 0;">
+          Reserva tu lugar en <span class="gold-shimmer-text">NOVA</span>
         </div>
-      </td>
-    </tr>
-
-    <!-- =========================================================
-         SECCIÓN DE FORMULARIO DE SUSCRIPCIÓN INTEGRADOCON EMAILJS
-         ========================================================= -->
-    <tr>
-      <td align="center" style="padding: 20px 36px 40px 36px;">
-        
-        <!-- VISTA 1: FORMULARIO ACTIVO -->
-        <div id="vista-form">
-          <div style="font-family: 'Arial', sans-serif; font-size: 15px; line-height: 26px; color: #D0D0D0; padding-bottom: 24px;">
-            Ingresa tu correo electrónico para activar tu membresía privada y recibir tu código de bienvenida.
-          </div>
-
-          <form id="form-suscripcion" class="form-group" novalidate>
-            <input 
-              type="email" 
-              id="user_email" 
-              name="user_email" 
-              class="input-email" 
-              placeholder="tu@correo.com" 
-              required 
-            />
-            
-            <div id="mensaje" class="mensaje"></div>
-
-            <div style="padding-top: 10px;">
-              <button type="submit" id="btn-enviar" class="btn-hyper">QUIERO SUSCRIBIRME</button>
-            </div>
-          </form>
+        <div style="font-family: 'Arial', sans-serif; font-size: 14px; color: #BBBBBB; max-width: 460px; margin: 0 auto 24px auto;">
+          Ingresa tu correo para recibir las invitaciones exclusivas y activar tu 15% de descuento inmediato.
         </div>
 
-        <!-- VISTA 2: CONFIRMACIÓN DE ÉXITO (HIDDEN POR DEFECTO) -->
-        <div id="vista-ok" hidden>
-          <div style="font-size: 24px; color: #FFD700; padding-bottom: 10px;">¡Bienvenido al Círculo NOVA!</div>
-          <div style="font-family: 'Arial', sans-serif; font-size: 15px; line-height: 26px; color: #D0D0D0;">
-            Hemos registrado tu invitación para:
+        <form id="form-suscripcion" style="max-width: 440px; margin: 0 auto;" novalidate>
+          <input type="email" id="user_email" name="user_email" class="input-email" placeholder="Introduce tu correo de acceso" required />
+          <div id="mensaje" class="mensaje-error"></div>
+          <div style="padding-top: 20px;">
+            <button type="submit" id="btn-enviar" class="btn-hyper">QUIERO SUSCRIBIRME</button>
           </div>
+        </form>
+      </div>
 
-          <div style="margin: 20px 0;">
-            <div class="glass-box" style="display: inline-block; padding: 14px 32px; font-family: 'Arial', sans-serif; font-size: 14px;">
-              <span style="color: #FFD700;">&#9670;</span> Suscriptor VIP: <span id="correo-ok" style="color: #FFD700; font-weight: bold;"></span>
-            </div>
-          </div>
-
-          <div style="padding-top: 10px;">
-            <button type="button" id="btn-otro" class="btn-outline-hyper">SUSCRIBIR OTRO CORREO</button>
-          </div>
+      <!-- VISTA CONFIRMACIÓN (PASE VIP ÉXITO) -->
+      <div id="vista-ok" hidden>
+        <div class="vip-card">
+          <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700;">MEMBRESÍA ACTIVA</div>
+          <div style="font-size: 32px; color: #FFFFFF; padding: 10px 0;" class="gold-shimmer-text">PASE VIP CÍRCULO NOVA</div>
+          <div style="font-family: Arial; font-size: 14px; color: #CCCCCC; padding-bottom: 15px;">Invitación confirmada para:</div>
+          <div style="font-family: monospace; font-size: 20px; color: #FFD700; background: rgba(0,0,0,0.6); padding: 12px; border-radius: 10px; border: 1px dashed #FFD700;" id="correo-ok"></div>
         </div>
-
-      </td>
-    </tr>
-
-    <!-- SECCIÓN: QUIÉNES SOMOS -->
-    <tr>
-      <td style="padding: 10px 30px 30px 30px;">
-        <div class="glass-box" style="padding: 40px 30px; text-align: center;">
-          <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700;">QUIÉNES SOMOS</div>
-          <div style="font-size: 30px; line-height: 38px; color: #FFFFFF; padding-top: 10px;">NOVA: lo exclusivo,<br><span style="font-style: italic;" class="gold-shimmer-text">bien hecho</span></div>
-          <div style="font-family: 'Arial', sans-serif; font-size: 15px; line-height: 26px; color: #C0C0C0; padding-top: 18px;">
-            NOVA reúne experiencias seleccionadas una a una. Cada propuesta tiene cupos limitados, atención personalizada y un estándar de calidad que no se negocia.
-          </div>
+        <div style="padding-top: 25px;">
+          <button type="button" id="btn-otro" style="background: transparent; border: 1px solid #FFD700; color: #FFD700; padding: 12px 30px; border-radius: 30px; cursor: pointer; font-family: Georgia;">SUSCRIBIR OTRO CORREO</button>
         </div>
-      </td>
-    </tr>
+      </div>
 
-    <!-- TARJETAS DE BENEFICIOS 3D -->
-    <tr>
-      <td align="center" style="padding: 10px 15px 30px 15px;">
-        <div style="font-size: 12px; letter-spacing: 6px; color: #FFD700; padding-bottom: 20px;">TUS VENTAJAS EXCLUSIVAS</div>
-        
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-          <tr>
-            <td width="33.33%" style="padding: 6px;">
-              <div class="glass-box" style="padding: 26px 12px; text-align: center;">
-                <div style="width: 54px; height: 54px; margin: 0 auto; background: rgba(255, 215, 0, 0.15); border: 1px solid #FFD700; border-radius: 50%; line-height: 54px; font-size: 24px; color: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.4);">&#10022;</div>
-                <div style="font-size: 17px; color: #FFFFFF; padding-top: 14px;">Acceso Anticipado</div>
-                <div style="font-family: Arial; font-size: 12px; color: #A0A0A0; padding-top: 8px; line-height: 18px;">Reserva antes que el público general.</div>
-              </div>
-            </td>
-            <td width="33.33%" style="padding: 6px;">
-              <div class="glass-box" style="padding: 26px 12px; text-align: center;">
-                <div style="width: 54px; height: 54px; margin: 0 auto; background: rgba(255, 215, 0, 0.15); border: 1px solid #FFD700; border-radius: 50%; line-height: 54px; font-size: 24px; color: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.4);">&#9830;</div>
-                <div style="font-size: 17px; color: #FFFFFF; padding-top: 14px;">Ofertas Privadas</div>
-                <div style="font-family: Arial; font-size: 12px; color: #A0A0A0; padding-top: 8px; line-height: 18px;">Beneficios inéditos no publicados.</div>
-              </div>
-            </td>
-            <td width="33.33%" style="padding: 6px;">
-              <div class="glass-box" style="padding: 26px 12px; text-align: center;">
-                <div style="width: 54px; height: 54px; margin: 0 auto; background: rgba(255, 215, 0, 0.15); border: 1px solid #FFD700; border-radius: 50%; line-height: 54px; font-size: 24px; color: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.4);">&#9733;</div>
-                <div style="font-size: 17px; color: #FFFFFF; padding-top: 14px;">Cupos Limitados</div>
-                <div style="font-family: Arial; font-size: 12px; color: #A0A0A0; padding-top: 8px; line-height: 18px;">Atención 100% personalizada.</div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+    </div>
 
-    <!-- CÓDIGO PROMOCIONAL DE BIENVENIDA -->
-    <tr>
-      <td style="padding: 10px 30px 40px 30px;">
-        <div class="glass-box" style="padding: 40px 24px; text-align: center; background: linear-gradient(180deg, rgba(212,175,55,0.25) 0%, rgba(15,15,18,0.9) 100%);">
-          <div style="font-size: 13px; letter-spacing: 5px; color: #FFD700; font-weight: bold;">INVITACIÓN ESPECIAL DE BIENVENIDA</div>
-          <div style="font-size: 46px; line-height: 52px; color: #FFFFFF; padding-top: 10px; font-weight: bold;">15% DE DESCUENTO</div>
-          <div style="font-style: italic; font-size: 18px; color: #FFD700; padding: 6px 0 24px 0;">en tu primera experiencia NOVA</div>
+    <!-- FOOTER Y COPYRIGHT -->
+    <div style="text-align: center; padding: 25px 20px; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+      <div class="gold-shimmer-text" style="font-size: 22px; letter-spacing: 10px; font-weight: bold;">NOVA</div>
+      <footer style="font-family: Arial, sans-serif; font-size: 12px; color: #777777; padding-top: 12px;">
+        &copy; 2026 NOVA – Experiencias Exclusivas. Todos los derechos reservados.
+      </footer>
+    </div>
 
-          <div class="promo-code-box">NOVA15</div>
-
-          <div style="font-family: Arial, sans-serif; font-size: 13px; color: #B0B0B0; padding-top: 20px;">Presenta este código al reservar. Válido por 30 días desde hoy.</div>
-        </div>
-      </td>
-    </tr>
-
-    <!-- FOOTER EXCLUSIVO CON COPYRIGHT -->
-    <tr>
-      <td align="center" style="padding: 30px 24px; border-top: 1px solid rgba(212, 175, 55, 0.2);">
-        <div class="gold-shimmer-text" style="font-size: 24px; letter-spacing: 12px; font-weight: bold; padding-left: 12px;">NOVA</div>
-        <div style="font-size: 10px; letter-spacing: 4px; color: #FFFFFF; padding-top: 4px;">EXPERIENCIAS EXCLUSIVAS</div>
-        <footer>
-          <div style="font-family: Arial, sans-serif; font-size: 12px; color: #777777; padding-top: 20px; line-height: 20px;">
-            &copy; 2026 NOVA – Experiencias Exclusivas. Todos los derechos reservados.
-          </div>
-        </footer>
-      </td>
-    </tr>
-
-  </table>
+  </div>
 </div>
 
-<!-- SDK de EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
 <script>
-  // Inicialización de EmailJS
-  emailjs.init({
-    publicKey: "F9AmISLiAJwwFvsM5"
-  });
+  // Setup de EmailJS
+  emailjs.init({ publicKey: "F9AmISLiAJwwFvsM5" });
 
-  const formulario = document.getElementById("form-suscripcion");
-  const campoCorreo = document.getElementById("user_email");
-  const boton      = document.getElementById("btn-enviar");
-  const mensaje    = document.getElementById("mensaje");
-  const vistaForm  = document.getElementById("vista-form");
-  const vistaOk    = document.getElementById("vista-ok");
-  const correoOk   = document.getElementById("correo-ok");
-  const btnOtro    = document.getElementById("btn-otro");
+  const form = document.getElementById("form-suscripcion");
+  const emailInput = document.getElementById("user_email");
+  const btnSubmit = document.getElementById("btn-enviar");
+  const mensajeErr = document.getElementById("mensaje");
+  const vistaForm = document.getElementById("vista-form");
+  const vistaOk = document.getElementById("vista-ok");
+  const correoOk = document.getElementById("correo-ok");
+  const btnOtro = document.getElementById("btn-otro");
 
-  function mostrarError(texto) {
-    mensaje.textContent = texto;
-    mensaje.className = "mensaje" + (texto ? " error" : "");
-  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const val = emailInput.value.trim();
 
-  formulario.addEventListener("submit", function (evento) {
-    evento.preventDefault();
-
-    const correo = campoCorreo.value.trim();
-
-    // Valida el correo antes de enviar
-    if (!campoCorreo.checkValidity() || correo === "") {
-      mostrarError("Escribe un correo válido, por ejemplo: nombre@correo.com");
-      campoCorreo.focus();
+    if (!emailInput.checkValidity() || val === "") {
+      mensajeErr.textContent = "Ingresa un correo válido (ejemplo@dominio.com)";
       return;
     }
 
-    mostrarError("");
-    boton.disabled = true;
-    boton.classList.add("enviando");
-    boton.textContent = "ENVIANDO...";
+    mensajeErr.textContent = "";
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = "ENVIANDO...";
 
-    // Envía el formulario vía EmailJS
-    emailjs.sendForm(
-      "service_in7gaoi",
-      "template_o7h05u2",
-      this
-    )
-      .then(function () {
-        correoOk.textContent = correo;
-        formulario.reset();
+    triggerExplosion();
+
+    emailjs.sendForm("service_in7gaoi", "template_o7h05u2", this)
+      .then(() => {
+        correoOk.textContent = val;
+        form.reset();
         vistaForm.hidden = true;
         vistaOk.hidden = false;
       })
-      .catch(function (error) {
-        console.error("Error de EmailJS:", error);
-        mostrarError("No pudimos enviar el correo. Revisa tu conexión e inténtalo de nuevo.");
+      .catch((err) => {
+        console.error("EmailJS Error:", err);
+        mensajeErr.textContent = "No pudimos procesar la solicitud. Revisa tu conexión.";
       })
-      .finally(function () {
-        boton.disabled = false;
-        boton.classList.remove("enviando");
-        boton.textContent = "QUIERO SUSCRIBIRME";
+      .finally(() => {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = "QUIERO SUSCRIBIRME";
       });
   });
 
-  // Volver al formulario para suscribir otro correo
-  btnOtro.addEventListener("click", function () {
+  btnOtro.addEventListener("click", () => {
     vistaOk.hidden = true;
     vistaForm.hidden = false;
-    campoCorreo.focus();
+    emailInput.focus();
   });
 
   /* =========================================================
-     SISTEMA DE PARTÍCULAS CANVAS EN TIEMPO REAL
+     EFECTO TILT 3D EN LAS TARJETAS
      ========================================================= */
-  const canvas = document.getElementById('particles-canvas');
+  const tiltElements = document.querySelectorAll('.tilt-element');
+  tiltElements.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `perspective(1000px) rotateX(${-y / 20}deg) rotateY(${x / 20}deg) scale(1.02)`;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
+
+  /* =========================================================
+     CUENTA REGRESIVA EN VIVO (COUNTDOWN TIMER)
+     ========================================================= */
+  let totalSeconds = 30 * 24 * 3600;
+  setInterval(() => {
+    if (totalSeconds > 0) totalSeconds--;
+    const d = Math.floor(totalSeconds / (3600 * 24));
+    const h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    
+    document.getElementById('t-days').textContent = String(d).padStart(2, '0');
+    document.getElementById('t-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('t-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('t-secs').textContent = String(s).padStart(2, '0');
+  }, 1000);
+
+  /* =========================================================
+     PARTÍCULAS INTERACTIVAS (CANVAS 2D)
+     ========================================================= */
+  const canvas = document.getElementById('interactive-canvas');
   const ctx = canvas.getContext('2d');
   let width, height;
   let particles = [];
+  let mouse = { x: -1000, y: -1000 };
 
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -484,9 +495,13 @@
   }
 
   window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
   resize();
 
-  class Particle {
+  class DynamicParticle {
     constructor() {
       this.reset();
     }
@@ -494,16 +509,25 @@
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.size = Math.random() * 2.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.6;
-      this.speedY = (Math.random() - 0.5) * 0.6;
-      this.alpha = Math.random() * 0.8 + 0.2;
-      this.color = Math.random() > 0.3 ? '#FFD700' : '#FFFFFF';
+      this.size = Math.random() * 2.5 + 0.8;
+      this.vx = (Math.random() - 0.5) * 1.2;
+      this.vy = (Math.random() - 0.5) * 1.2;
+      this.color = Math.random() > 0.4 ? '#FFD700' : '#FFF5B8';
+      this.alpha = Math.random() * 0.7 + 0.3;
     }
 
     update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
+      this.x += this.vx;
+      this.y += this.vy;
+
+      let dx = mouse.x - this.x;
+      let dy = mouse.y - this.y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150) {
+        let force = (150 - dist) / 150;
+        this.x -= (dx / dist) * force * 6;
+        this.y -= (dy / dist) * force * 6;
+      }
 
       if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
         this.reset();
@@ -514,7 +538,7 @@
       ctx.save();
       ctx.globalAlpha = this.alpha;
       ctx.fillStyle = this.color;
-      ctx.shadowBlur = 10;
+      ctx.shadowBlur = 12;
       ctx.shadowColor = this.color;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -523,20 +547,30 @@
     }
   }
 
-  for (let i = 0; i < 120; i++) {
-    particles.push(new Particle());
+  for (let i = 0; i < 150; i++) particles.push(new DynamicParticle());
+
+  function triggerExplosion() {
+    for (let i = 0; i < 70; i++) {
+      let p = new DynamicParticle();
+      p.x = width / 2;
+      p.y = height / 2;
+      p.vx = (Math.random() - 0.5) * 14;
+      p.vy = (Math.random() - 0.5) * 14;
+      p.size = Math.random() * 4 + 2;
+      particles.push(p);
+    }
   }
 
-  function animate() {
+  function render() {
     ctx.clearRect(0, 0, width, height);
     particles.forEach(p => {
       p.update();
       p.draw();
     });
-    requestAnimationFrame(animate);
+    requestAnimationFrame(render);
   }
 
-  animate();
+  render();
 </script>
 
 </body>
